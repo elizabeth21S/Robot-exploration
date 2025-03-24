@@ -1,34 +1,30 @@
 # Robôs autônomos
-Esse repositório contém a implementação de um sistema de navegação autônoma no ROS 2, usando RRT e um robô equipado com sensores para explorar e se mover por um ambiente a fim de detectar uma pessoa.
+Esse repositório contém a implementação de um sistema de navegação autônoma no ROS 2, usando Rapidly-exploring Random Trees Connect (RRT-Connect) e um robô equipado com sensores para explorar e se mover por um ambiente a fim de detectar uma pessoa.
 ## 📂 **Instalação e Configuração**
-### 1️⃣ Clonar o repositório
+### 1️⃣ Configurar o ambiente do ROS 2 e Clearpath
+Use o arquivo de texto no repositório denominado instruções para instalar e configurar o Clearpath Simulator em seguida, siga as etapas abaixo.
+
+### 2️⃣Clonar o repositório
+Entre no espaço de trabalho e clone o repositório em src.
 ```bash
 https://github.com/elizabeth21S/Robot-exploration.git
 ```
-### 2️⃣Configurar o ambiente do ROS 2
-Certifique-se de que o ROS 2 Humble está instalado e configurado corretamente. Em seguida, compile e configure o ambiente:
-```bash
-cd ros2_ws
-source /opt/ros/humble/setup.bash
-colcon build
-source install/setup.bash
-```
-### 3️⃣ Iniciar a simulação e a navegação
 
-Para iniciar a simulação e o sistema de navegação:
+### 3️⃣ Iniciar a simulação
+Para iniciar a simulação:
 ```bash
-export TURTLEBOT3_MODEL=waffle  # Iron and older only with Gazebo Classic
-export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:/opt/ros/<ros2-distro>/share/turtlebot3_gazebo/models # Iron and older only with Gazebo Classic
-
-ros2 launch rrt_navigation rrt_worldlaunch.py headless:=False world:=ruta/to/world slam:=True
+ros2 launch clearpath_gz simulantion.launch.py rviz:=true world:=name/world
 ```
 
-### 4️⃣ Iniciar a detecção de obstáculos
+### 4️⃣ Iniciar a detecção de pessoas e navegação 
 Para iniciar a detecção, executar em outro terminal:
 ```bash
-ros2 run rrt_navigation test_camera
+ros2 run rrt_explorer rrt_detect
 ```
-
+Para iniciar a navegação, executar em outro terminal:
+```bash
+ros2 run rrt_explorer rrt_node
+```
 
 ### 🛠 Requisitos
 
