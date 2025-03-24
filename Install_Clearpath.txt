@@ -1,0 +1,62 @@
+﻿1 - Executar os comandos no terminal:
+
+sudo apt-get update && sudo apt-get install wget
+sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+sudo apt-get update && sudo apt-get install ignition-fortress
+----------------------------------------------------------------------------------------------------------------------------------
+2 - Instalar o Clearpath Simulator:
+
+sudo apt-get update
+sudo apt-get install ros-humble-clearpath-simulator*
+
+----------------------------------------------------------------------------------------------------------------------------------
+3 - Create workspace :
+
+mkdir ~/clearpath_ws/src -p
+
+----------------------------------------------------------------------------------------------------------------------------------
+4 - Importando as depêndecias:
+
+source /opt/ros/humble/setup.bash
+sudo apt install python3-vcstool
+cd ~/clearpath_ws
+wget https://raw.githubusercontent.com/clearpathrobotics/clearpath_simulator/main/dependencies.repos
+vcs import src < dependencies.repos
+rosdep install -r --from-paths src -i -y
+
+-----------------------------------------------------------------------------------------------------------------------------------
+5 - Dar um Build nos pacotes:
+
+colcon build --symlink-install
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+6 - Pegar o pacote do sensores no repositorio e adicionar na pasta src do repositório:
+
+https://github.com/clearpathrobotics/clearpath_robot.git
+----------------------------------------------------------------------------------------------------------------------------------
+7 - Dar um novo Build nos pacotes:
+
+cd clearpath_ws 
+colcon build
+
+-------------------------------------------------------------------------------------------------------------------------------------
+8 - Criar  a pasta do clearpath no home.
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+9 - Adicione o arquivo do robô disponbilizado do robô na pasta clearpath.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+10 - Dentro do arquivo do robô troque o caminho do workspace pelo caminho do seu workspace.
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+Pacotes adicionais colocados no ROS 2:
+
+11 -  sudo apt install ros-humble-moveit 
+
+
+
